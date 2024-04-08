@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+<head>
+<!-- <link href="Logo_UFABC_IB.jpeg" rel="icon" type="image/jpeg"/> -->
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<img alt="Banco de Ideias UFABC" src="Logo_UFABC_IB.jpeg"/>
+<title>Banco de Ideias</title>
+<style>
+        body {
+            width: 1024px;
+            height: 1024px;
+            /* background-image: url("Logo_UFABC_IB.jpeg");
+            background-size: cover; */
+        }
+        /* Estilos para o formulário */
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        /* Estilos para os blocos de ideias */
+        .idea-block {
+            background-color: #eff7ff;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<h1>Banco de Ideias</h1>
+<form id="idea-form">
+<input id="titulo" placeholder="Título da Ideia" required="" type="text"/>
+<input id="email" placeholder="Seu Email" required="" type="email"/>
+<textarea id="descricao" placeholder="Descrição da Ideia" required="" rows="4"></textarea>
+<button onclick="adicionarIdeaa()" type="button">Enviar</button>
+</form>
+<div id="ideias-container"></div>
+<script>
+        document.getElementById('titulo').addEventListener('input', function (e) {
+            e.target.value = e.target.value.replace(/ /g, '-');
+            });
+
+
+        const ideiasContainer = document.getElementById('ideias-container');
+        function adicionarIdeaa() {
+            const titulo = document.getElementById('titulo').value;
+            const email = document.getElementById('email').value;
+            const descricao = document.getElementById('descricao').value;
+
+            var data = { "titulo": titulo, "emailAutor": email , "descricao" : descricao};
+            
+            var xhr = new XMLHttpRequest();
+            xhr.open("PUT", "http://localhost:8080", true); 
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify(data));
+
+            
+            // Crie um novo bloco de ideia
+            const ideaBlock = document.createElement('div');
+            ideaBlock.classList.add('idea-block');
+            ideaBlock.innerHTML = `
+                <h2>${titulo}</h2>
+                <p>Autor: ${email}</p>
+                <a href="${titulo}.html"><button onclick="verDetalhe()">Ver Detalhe da Ideia</button></a>
+            `;        
+        
+            // Adicione o bloco à lista de ideias
+            ideiasContainer.appendChild(ideaBlock);
+
+            // Limpe os campos do formulário
+            document.getElementById('titulo').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('descricao').value = '';
+
+        }
+        
+    </script>
+</body>
+</html>

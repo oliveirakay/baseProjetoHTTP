@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>PUT generico</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: #333;
+            background-color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #007aff;
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+
+        a {
+            color: #007aff;
+            text-decoration: none;
+        }
+
+        p {
+            font-size: 1.5em;
+            margin-bottom: 1em;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <h1>E ai? Quer upar uma pagina qualquer? Basta que o nome do arquivo contenha put. Exemplo: PUT http://localhost:8080/putNovoArquivo</h1>
+    <h1 id="title">Quer upar uma Ideia? Faz um put no <a href="bancoDeIdeias.html">Banco de Ideias</a></h1>
+    <p id="description">La voce cadastra uma ideia e pode acessar todas as outras ja presentes</p>
+    <p id="instructions">Como a pagina funciona? Quando vc clica em "enviar" um PUT eh feito por baixo dos panos.
+        Com o formulario que voce preenche, um JSON eh construido em memoria e entao eh usado como parametro
+        para construcao da nova ideia. Mas voce tambem pode fazer um PUT direto na nossa pagina do banco de ideias
+        que so ira funcionar se no corpo da sua requisicao tiver um json num formato especifico. 
+        Qual formato? Tenta fazer e uma resposta de erro vai te explicar como. 
+    </p>
+    <script>
+        document.getElementById('title').addEventListener('mouseover', function() {
+            this.style.color = '#ff3b30';
+        });
+
+        document.getElementById('title').addEventListener('mouseout', function() {
+            this.style.color = '#007aff';
+        });
+    </script>
+</body>
+</html>
